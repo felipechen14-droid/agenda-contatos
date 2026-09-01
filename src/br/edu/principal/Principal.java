@@ -1,78 +1,87 @@
 package br.edu.principal;
 
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Principal {
 
     public static void main(String[] args) {
-
         List<String> nomes = new ArrayList<>();
         List<String> celulares = new ArrayList<>();
         List<String> emails = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
 
-        int opcao;
         boolean continuar = true;
 
-        System.out.println("==========================");
-        System.out.println("     AGENDA DE CONTATOS");
-        System.out.println("          V.0.2.0");
-        System.out.println("==========================");
+        System.out.println("==============================");
+        System.out.println("       AGENDA DE CONTATOS");
+        System.out.println("           V.0.2.0");
+        System.out.println("==============================");
         System.out.println("Bem-vindo!");
 
         while (continuar) {
 
             System.out.println();
+            System.out.println("========== MENU ==========");
             System.out.println("1 - Adicionar contato");
-            System.out.println("2 - Listar contato");
+            System.out.println("2 - Listar contatos");
             System.out.println("3 - Procurar contato");
             System.out.println("4 - Excluir contato");
             System.out.println("5 - Sair");
-            System.out.println();
+            System.out.println("===========================");
 
             System.out.print("Escolha uma opção: ");
-            opcao = sc.nextInt();
+            int opcao = sc.nextInt();
             sc.nextLine();
 
             switch (opcao) {
-
                 case 1 -> {
+
                     System.out.println("\n--- ADICIONAR CONTATO ---");
 
                     System.out.print("Nome: ");
-                    nomes.add(sc.nextLine());
+                    String nome = sc.nextLine();
 
                     System.out.print("Celular: ");
-                    celulares.add(sc.nextLine());
+                    String celular = sc.nextLine();
 
                     System.out.print("E-mail: ");
-                    emails.add(sc.nextLine());
+                    String email = sc.nextLine();
 
-                    System.out.println("Contato salvo com sucesso!");
+                    nomes.add(nome);
+                    celulares.add(celular);
+                    emails.add(email);
+
+                    System.out.println("\nContato salvo com sucesso!");
                 }
 
                 case 2 -> {
-                    System.out.println("\n--- LISTAR CONTATOS ---");
 
-                    if (nomes.size() == 0) {
-                        System.out.println("Nenhum contato encontrado!");
+                    System.out.println("\n--- LISTA DE CONTATOS ---");
+
+                    if (nomes.isEmpty()) {
+
+                        System.out.println("Nenhum contato cadastrado.");
+
                     } else {
+
                         for (int i = 0; i < nomes.size(); i++) {
+
                             System.out.println("\nContato " + (i + 1));
+                            System.out.println("--------------------------");
                             System.out.println("Nome: " + nomes.get(i));
                             System.out.println("Celular: " + celulares.get(i));
                             System.out.println("E-mail: " + emails.get(i));
                         }
                     }
                 }
-
                 case 3 -> {
+
                     System.out.println("\n--- PROCURAR CONTATO ---");
 
-                    System.out.print("Digite o nome que deseja procurar: ");
+                    System.out.print("Digite o nome: ");
                     String nomeBusca = sc.nextLine();
 
                     boolean encontrado = false;
@@ -81,7 +90,8 @@ public class Principal {
 
                         if (nomes.get(i).equalsIgnoreCase(nomeBusca)) {
 
-                            System.out.println("Contato encontrado!");
+                            System.out.println("\nContato encontrado!");
+                            System.out.println("--------------------------");
                             System.out.println("Nome: " + nomes.get(i));
                             System.out.println("Celular: " + celulares.get(i));
                             System.out.println("E-mail: " + emails.get(i));
@@ -94,17 +104,17 @@ public class Principal {
                         System.out.println("Contato não encontrado.");
                     }
                 }
-
                 case 4 -> {
+
                     System.out.println("\n--- EXCLUIR CONTATO ---");
 
-                    if (nomes.size() == 0) {
+                    if (nomes.isEmpty()) {
 
                         System.out.println("Nenhum contato cadastrado.");
 
                     } else {
 
-                        System.out.print("Digite o nome do contato que deseja excluir: ");
+                        System.out.print("Digite o nome do contato: ");
                         String nomeExcluir = sc.nextLine();
 
                         int indiceExcluir = -1;
@@ -113,6 +123,7 @@ public class Principal {
 
                             if (nomes.get(i).equalsIgnoreCase(nomeExcluir)) {
                                 indiceExcluir = i;
+                                break;
                             }
                         }
 
@@ -132,14 +143,21 @@ public class Principal {
                 }
 
                 case 5 -> {
-                    System.out.println("Saindo...");
+
+                    System.out.println("\nEncerrando a agenda...");
+                    System.out.println("Obrigado por utilizar!");
+
                     continuar = false;
                 }
+                default -> {
 
-                default -> System.out.println("Opção inválida!");
+                    System.out.println("\nOpção inválida!");
+                    System.out.println("Escolha uma opção entre 1 e 5.");
+                }
             }
         }
 
         sc.close();
     }
 }
+
