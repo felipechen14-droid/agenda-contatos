@@ -1,0 +1,13 @@
+# Java
+*.class
+
+# Eclipse
+bin/
+.metadata/
+.settings/
+
+# macOS
+.DS_Store
+
+# Arquivos temporários
+*.log
